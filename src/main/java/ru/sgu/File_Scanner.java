@@ -4,8 +4,9 @@ import java.io.FileNotFoundException;
 
 
 public class File_Scanner {
+    public String fileName = "input.txt";
     public void start(){
-        File file = new File("input.txt");
+        File file = new File(fileName);
         try {
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
