@@ -28,7 +28,7 @@ public class t2 {
             }
         }
 
-        try (ZipOutputStream zout = new ZipOutputStream(new FileOutputStream("output.zip"))) {
+        try (ZipOutputStream zout = new ZipOutputStream(new FileOutputStream(zipFileName))) {
             for (File f : res) {
                 archiver(f, f.getName(), zout);
             }
