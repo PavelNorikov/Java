@@ -2,7 +2,7 @@ import java.util.Objects;
 import java.lang.*;
 
 
-abstract class AbstractPhone implements Phone, Cloneable {
+public abstract class AbstractPhone implements Phone {
     String type;
     String brand;
     String model;
@@ -25,7 +25,7 @@ abstract class AbstractPhone implements Phone, Cloneable {
         return model;
     }
     public String getNumber() {
-        return model;
+        return number;
     }
 
 
@@ -38,8 +38,8 @@ abstract class AbstractPhone implements Phone, Cloneable {
     public void  setModel(String model2) {
         this.model = model2;
     }
-    public void  setNumber(String model2) {
-        this.model = model2;
+    public void  setNumber(String number2) {
+        this.number = number2;
     }
 
     public String toString() {
@@ -47,7 +47,8 @@ abstract class AbstractPhone implements Phone, Cloneable {
     }
 
     public AbstractPhone shallowCopy() {
-        return this;
+        AbstractPhone newPhone = this;
+        return newPhone;
     }
 
 
@@ -56,22 +57,28 @@ abstract class AbstractPhone implements Phone, Cloneable {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         AbstractPhone that = (AbstractPhone) obj;
-        return brand.equals(that.brand) && model.equals(that.model);
+        return  type.equals(that.type) && brand.equals(that.brand) &&
+                model.equals(that.model) && number.equals(that.number);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(brand, model);
+        return Objects.hash(type, brand, model, number);
     }
 
 
-    public int compareTo(BasicPhone other) {
-        int brandComparison = this.brand.compareTo(other.brand);
-        if (brandComparison != 0) {
-            return brandComparison;
-        } else {
-            return this.model.compareTo(other.model);
+    public int compareTo(AbstractPhone other) {
+        int res = this.type.compareTo(other.type);
+        if (res != 0) {
+            res = this.brand.compareTo(other.brand);
         }
+        if (res != 0) {
+            res = this.model.compareTo(other.model);
+        }
+        if (res != 0) {
+            res = this.number.compareTo(other.number);
+        }
+        return res;
     }
 
     @Override
@@ -84,5 +91,4 @@ abstract class AbstractPhone implements Phone, Cloneable {
         System.out.println("С телефона " + getDescription() + " отправлено сообщение на номер " + number + " с текстом: " + message);
     }
 
-    //public abstract String getDescription();
 }

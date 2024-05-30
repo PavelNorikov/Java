@@ -4,12 +4,12 @@ import java.lang.*;
 
 public class Main {
     public static void main(String[] args) {
-        List<Phone> phones = new ArrayList<>();
+        List<AbstractPhone> phones = new ArrayList<>();
         phones.add(new BasicPhone("Basic","Nokia", "3310", "1234567890"));
         phones.add(new SmartPhone("Smart","Apple", "iPhone 12", "0987654321"));
         phones.add(new SmartPhone("Smart","Samsung", "Galaxy S5", "7777777777"));
 
-        for (Phone phone : phones) {
+        for (AbstractPhone phone : phones) {
             System.out.println(phone.getDescription());
             phone.makeCall("3333333333");
             phone.sendMessage("3333333333", "test message");
@@ -36,6 +36,20 @@ public class Main {
         System.out.println("Hashcode оригинала: " + phone1.hashCode());
         System.out.println("Hashcode глубокой копии: " + phone2.hashCode());
         System.out.println("Hashcode поверхностной копии: " + phone3.hashCode());
+        System.out.println("Поверхностное копирование: " + phone3);
+
+        for (AbstractPhone phone_1 : phones) {
+            for (AbstractPhone phone_2 : phones) {
+                System.out.println(phone_1.getDescription());
+                System.out.println(phone_1.hashCode());
+                System.out.println(phone_2.getDescription());
+                System.out.println(phone_2.hashCode());
+                System.out.println(phone_1.equals(phone_2));
+                System.out.println(phone_1.compareTo(phone_2));
+            }
+        }
+
+
 
 
     }
